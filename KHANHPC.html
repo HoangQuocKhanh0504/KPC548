@@ -1,61 +1,1102 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoàng Quốc Khánh</title>
-<link rel="icon" href="KHANHPC.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-:root{
---primary:#00ffcc;
---bg:#0f0f12;
---card:#1c1c22;
---text:#fff;
---border:#333;
---avatar-border-width:4px;
---avatar-border-color:#00ffcc;
-}
-body{margin:0;background:var(--bg);color:var(--text);display:flex;justify-content:center;align-items:center;height:100vh;font-family:system-ui;}
-.card{width:380px;padding:30px;border-radius:28px;text-align:center;background:var(--card);color:var(--text);}
-.avatar-wrap{display:inline-block;border-radius:50%;border:none;}
-.avatar-wrap.rgb{border:none;background: linear-gradient(270deg, red,orange,yellow,lime,cyan,blue,violet,red);background-size:400% 400%;animation:rgb 4s linear infinite;padding:4px;}
-.avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;display:block;}
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-height: 250px;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.links::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
-}
-
-.links a{display:flex;gap:12px;align-items:center;padding:14px;margin:0;border-radius:16px;border:1px solid var(--border);text-decoration:none;color:inherit;}
-.links a:hover{background:var(--primary);color:#fff;}
-@keyframes rgb{0%{background-position:0%}100%{background-position:400%}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="mainTitle">Hoàng Quốc Khánh | KHANHPC</title>
+    <link rel="icon" href="KHANHPC.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset và ẩn tất cả scrollbar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Ẩn tất cả scrollbar nhưng vẫn cho phép scroll */
+        body, .links, .nitro-card-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body::-webkit-scrollbar,
+        .links::-webkit-scrollbar,
+        .nitro-card-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        :root {
+            --primary: #00ffcc;
+            --primary-dark: #00cca3;
+            --online: #3ba55d;
+            --idle: #faa81a;
+            --dnd: #ed4245;
+            --offline: #747f8d;
+            --fb-blue: #1877f2;
+            --fb-verified: #1b74e4;
+            --nitro-purple: #aa00ff;
+            --nitro-pink: #ff00aa;
+            --nitro-blue: #0088ff;
+            --nitro-cyan: #00ffcc;
+            --bg: #0f0f12;
+            --card: #1c1c22;
+            --card-hover: #24242b;
+            --text: #ffffff;
+            --text-secondary: #b0b0b8;
+            --border: #333340;
+            --shadow: rgba(0, 255, 204, 0.1);
+            --nitro-gradient: linear-gradient(45deg, 
+                var(--nitro-purple) 0%, 
+                var(--nitro-pink) 25%, 
+                var(--nitro-blue) 50%, 
+                var(--nitro-cyan) 75%, 
+                var(--nitro-purple) 100%);
+        }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Nền động */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(170, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 136, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 204, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--nitro-purple);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 20s infinite linear;
+            filter: blur(1px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-100px) translateX(100px) rotate(90deg); }
+            50% { transform: translateY(-50px) translateX(-100px) rotate(180deg); }
+            75% { transform: translateY(100px) translateX(50px) rotate(270deg); }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); }
+        }
+        
+        /* Container cho card */
+        .nitro-card-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            padding: 4px;
+            border-radius: 28px;
+            background: var(--nitro-gradient);
+            background-size: 300% 300%;
+            animation: nitroBorder 6s linear infinite;
+            box-shadow: 
+                0 0 30px rgba(170, 0, 255, 0.4),
+                0 0 60px rgba(0, 136, 255, 0.2),
+                0 0 90px rgba(255, 0, 170, 0.1);
+            overflow: hidden;
+        }
+        
+        @keyframes nitroBorder {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 300%; }
+        }
+        
+        /* Card chính */
+        .card {
+            width: 100%;
+            padding: 30px 20px;
+            border-radius: 24px;
+            text-align: center;
+            background: var(--card);
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        /* AVATAR DISCORD NITRO STYLE */
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            width: 140px;
+            height: 140px;
+        }
+        
+        .nitro-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--nitro-gradient);
+            background-size: 300% 300%;
+            animation: nitroSpin 4s linear infinite, nitroBorder 6s linear infinite;
+            padding: 4px;
+            box-shadow: 
+                0 0 25px rgba(170, 0, 255, 0.7),
+                0 0 50px rgba(0, 136, 255, 0.4),
+                0 0 75px rgba(255, 0, 170, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+        
+        @keyframes nitroSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .avatar-wrapper {
+            position: absolute;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            top: 4px;
+            left: 4px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 2;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            position: relative;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0;
+            animation: sparkle 3s infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(0deg); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1) rotate(180deg); 
+            }
+        }
+        
+        /* Status indicator */
+        .status-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 4;
+            border: 4px solid var(--card);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+        
+        .status-dot {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--online);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                transparent 70%);
+            animation: statusGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes statusGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+        
+        /* TÊN VỚI TÍCH XANH FACEBOOK - ĐÃ SỬA LỖI CHÍNH TẢ */
+        .name-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            position: relative;
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--nitro-pink), var(--nitro-cyan), var(--nitro-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 25px rgba(170, 0, 255, 0.4);
+            margin: 0;
+            display: inline-block;
+            line-height: 1;
+        }
+        
+        /* TÍCH XANH FACEBOOK */
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .verified-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--fb-verified);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(27, 116, 228, 0.5);
+            animation: verifiedPulse 3s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .verified-icon::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--fb-verified);
+            opacity: 0.5;
+            animation: verifiedRing 2s infinite;
+        }
+        
+        .verified-icon i {
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Tooltip khi hover vào tích xanh - ĐÃ SỬA LỖI CHÍNH TẢ */
+        .verified-tooltip {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .verified-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.9);
+        }
+        
+        .verified-badge:hover .verified-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .verified-badge:hover .verified-icon {
+            transform: scale(1.2);
+            box-shadow: 0 0 25px rgba(27, 116, 228, 0.8);
+        }
+        
+        @keyframes verifiedPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(27, 116, 228, 0.5);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(27, 116, 228, 0.7);
+            }
+        }
+        
+        @keyframes verifiedRing {
+            0% { 
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% { 
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+        
+        /* Badge Nitro */
+        .badge {
+            display: inline-block;
+            background: rgba(170, 0, 255, 0.15);
+            color: var(--nitro-cyan);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            margin-bottom: 25px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--nitro-gradient);
+            background-size: 300% 300%;
+            border-radius: 25px;
+            animation: nitroBorder 6s linear infinite;
+            z-index: -1;
+        }
+        
+        /* Links */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-right: 2px;
+            margin-bottom: 20px;
+        }
+        
+        .links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .links a:active {
+            background: rgba(170, 0, 255, 0.2);
+            border-color: var(--nitro-purple);
+            transform: scale(0.98);
+        }
+        
+        .links a:hover {
+            background: rgba(170, 0, 255, 0.15);
+            border-color: var(--nitro-purple);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(170, 0, 255, 0.3);
+        }
+        
+        .links i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            color: var(--nitro-cyan);
+        }
+        
+        .links span {
+            flex-grow: 1;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        .footer {
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--nitro-gradient);
+            background-size: 300% 300%;
+            border-radius: 2px;
+            animation: nitroBorder 6s linear infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .verified-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .verified-icon i {
+                font-size: 10px;
+            }
+            
+            .status-container {
+                width: 28px;
+                height: 28px;
+                bottom: 8px;
+                right: 8px;
+            }
+            
+            .name-container {
+                gap: 8px;
+            }
+            
+            .verified-tooltip {
+                font-size: 11px;
+                padding: 6px 10px;
+                top: -40px;
+            }
+        }
+        
+        /* Loading screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--nitro-gradient);
+            background-size: 300% 300%;
+            animation: nitroBorder 2s linear infinite, nitroSpin 1s linear infinite;
+        }
+    </style>
 </head>
 <body>
-<div class="card">
-  <div class="avatar-wrap rgb">
-    <img class="avatar" src="KHANHPC.png" alt="Hoàng Quốc Khánh">
-  </div>
-  <h1>Hoàng Quốc Khánh</h1>
-  <p>KHANHPC</p>
-  <div class="links">
-    <a href="https://aikhanh.onrender.com/" target="_blank"><i class="fas fa-globe"></i>Website</a>
-    <a href="https://www.facebook.com/khanhpc548" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
-    <a href="https://github.com/HoangQuocKhanh0504" target="_blank"><i class="fab fa-github"></i>GitHub</a>
-    <a href="https://www.tiktok.com/@khanhyeutien548" target="_blank"><i class="fab fa-tiktok"></i>TikTok</a>
-    <a href="https://www.youtube.com/@KhanhPC-k8" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
-    <a href="https://discord.gg/uM5HyRKC" target="_blank"><i class="fab fa-discord"></i>Discord</a>
-    <a href="https://zalo.me/0924944845" target="_blank"><i class="fas fa-comment-dots"></i>Zalo: 0924944845</a>
-  </div>
-</div>
+    <!-- Loading screen -->
+    <div class="loading" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Nền động -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <!-- Card với viền Nitro -->
+    <div class="nitro-card-container">
+        <div class="card">
+            <!-- AVATAR DISCORD NITRO STYLE -->
+            <div class="avatar-container" id="avatarContainer">
+                <!-- Viền gradient xoay -->
+                <div class="nitro-border" id="nitroBorder"></div>
+                
+                <!-- Avatar bên trong -->
+                <div class="avatar-wrapper">
+                    <img class="avatar" src="KHANHPC.png" alt="Hoàng Quốc Khánh" 
+                         onerror="this.src='https://ui-avatars.com/api/?name=KHANHPC&background=aa00ff&color=fff&bold=true&size=256'">
+                </div>
+                
+                <!-- Status indicator -->
+                <div class="status-container">
+                    <div class="status-dot"></div>
+                </div>
+            </div>
+            
+            <!-- TÊN VỚI TÍCH XANH FACEBOOK - ĐÃ SỬA LỖI CHÍNH TẢ -->
+            <div class="name-container">
+                <h1>Hoàng Quốc Khánh</h1>
+                <div class="verified-badge">
+                    <div class="verified-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <!-- Tooltip đã sửa lỗi chính tả -->
+                    <div class="verified-tooltip">
+                        <i class="fas fa-check-circle" style="margin-right: 5px;"></i>
+                        Đã xác minh
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge">KHANHPC</div>
+            <p class="subtitle">Developer & Content Creator</p>
+            
+            <div class="links" id="linksContainer">
+                <a href="https://aikhanh.onrender.com/" target="_blank" rel="noopener">
+                    <i class="fas fa-globe"></i>
+                    <span>Website</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://www.facebook.com/khanhpc548" target="_blank" rel="noopener">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://github.com/HoangQuocKhanh0504" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://www.tiktok.com/@khanhyeutien548" target="_blank" rel="noopener">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://www.youtube.com/@KhanhPC-k8" target="_blank" rel="noopener">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://discord.gg/uM5HyRKC" target="_blank" rel="noopener">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord Server</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+                <a href="https://zalo.me/0924944845" target="_blank" rel="noopener">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Zalo: 0924944845</span>
+                    <i class="fas fa-external-link-alt external-icon"></i>
+                </a>
+            </div>
+            
+            <div class="footer">
+                © 2026 KHANHPC | Made with <i class="fas fa-heart" style="color: var(--nitro-pink);"></i>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Ẩn loading screen
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1000);
+            
+            // Tạo hiệu ứng nền động
+            const bgAnimation = document.getElementById('bgAnimation');
+            const colors = ['#aa00ff', '#ff00aa', '#0088ff', '#00ffcc'];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                bgAnimation.appendChild(particle);
+            }
+            
+            // Tạo hiệu ứng lấp lánh cho avatar
+            const avatarContainer = document.getElementById('avatarContainer');
+            const nitroBorder = document.getElementById('nitroBorder');
+            
+            // Thêm sparkles xung quanh viền
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                const angle = (i / 8) * Math.PI * 2;
+                const radius = 72;
+                const x = 50 + Math.cos(angle) * (radius / 140 * 100) + '%';
+                const y = 50 + Math.sin(angle) * (radius / 140 * 100) + '%';
+                
+                sparkle.style.left = x;
+                sparkle.style.top = y;
+                sparkle.style.animationDelay = `${i * 0.5}s`;
+                
+                const sparkleSize = Math.random() * 6 + 4;
+                sparkle.style.width = `${sparkleSize}px`;
+                sparkle.style.height = `${sparkleSize}px`;
+                sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                avatarContainer.appendChild(sparkle);
+            }
+            
+            // Hiệu ứng hover cho avatar
+            avatarContainer.addEventListener('mouseenter', function() {
+                nitroBorder.style.animationDuration = '2s';
+                nitroBorder.style.filter = 'brightness(1.3)';
+                
+                // Thêm sparkles mới khi hover
+                for (let i = 0; i < 3; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    sparkle.style.left = `${Math.random() * 100}%`;
+                    sparkle.style.top = `${Math.random() * 100}%`;
+                    sparkle.style.animationDelay = '0s';
+                    sparkle.style.animationDuration = '1s';
+                    sparkle.style.width = '10px';
+                    sparkle.style.height = '10px';
+                    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    avatarContainer.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }
+            });
+            
+            avatarContainer.addEventListener('mouseleave', function() {
+                nitroBorder.style.animationDuration = '4s';
+                nitroBorder.style.filter = 'brightness(1)';
+            });
+            
+            // Touch events cho mobile
+            avatarContainer.addEventListener('touchstart', function() {
+                nitroBorder.style.animationDuration = '2s';
+                nitroBorder.style.filter = 'brightness(1.3)';
+            }, { passive: true });
+            
+            avatarContainer.addEventListener('touchend', function() {
+                nitroBorder.style.animationDuration = '4s';
+                nitroBorder.style.filter = 'brightness(1)';
+            }, { passive: true });
+            
+            // Hiệu ứng click cho links
+            const links = document.querySelectorAll('.links a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Hiệu ứng ripple
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    
+                    const x = e.type.includes('touch') ? 
+                        e.touches[0].clientX - rect.left - size/2 :
+                        e.clientX - rect.left - size/2;
+                        
+                    const y = e.type.includes('touch') ?
+                        e.touches[0].clientY - rect.top - size/2 :
+                        e.clientY - rect.top - size/2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                        mix-blend-mode: screen;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                }, { passive: true });
+            });
+            
+            // Tooltip cho tích xanh trên mobile
+            const verifiedBadge = document.querySelector('.verified-badge');
+            let touchTimer;
+            
+            verifiedBadge.addEventListener('touchstart', function() {
+                touchTimer = setTimeout(() => {
+                    const tooltip = this.querySelector('.verified-tooltip');
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                    tooltip.style.transform = 'translateX(-50%) translateY(0)';
+                }, 500);
+            }, { passive: true });
+            
+            verifiedBadge.addEventListener('touchend', function() {
+                clearTimeout(touchTimer);
+                setTimeout(() => {
+                    const tooltip = this.querySelector('.verified-tooltip');
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                    tooltip.style.transform = 'translateX(-50%) translateY(10px)';
+                }, 2000);
+            }, { passive: true });
+            
+            // Thêm CSS cho ripple effect
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(3);
+                        opacity: 0;
+                    }
+                }
+                
+                /* Hiệu ứng nhấp nháy cho tích xanh */
+                .verified-icon {
+                    animation: verifiedPulse 3s infinite, verifiedBlink 5s infinite;
+                }
+                
+                @keyframes verifiedBlink {
+                    0%, 95%, 100% { opacity: 1; }
+                    97% { opacity: 0.5; }
+                    98% { opacity: 0.8; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        // Thay đổi status ngẫu nhiên
+        setInterval(() => {
+            const statusDot = document.querySelector('.status-dot');
+            const statuses = ['online', 'idle', 'dnd', 'offline'];
+            const colors = {
+                'online': '#3ba55d',
+                'idle': '#faa81a',
+                'dnd': '#ed4245',
+                'offline': '#747f8d'
+            };
+            
+            const random = Math.random();
+            let status;
+            
+            if (random < 0.8) {
+                status = 'online';
+            } else if (random < 0.85) {
+                status = 'idle';
+            } else if (random < 0.95) {
+                status = 'dnd';
+            } else {
+                status = 'offline';
+            }
+            
+            statusDot.style.backgroundColor = colors[status];
+        }, 30000);
+    </script>
+        
+    <script>
+        // ========== CẤU HÌNH HIỆU ỨNG ==========
+        const CONFIG = {
+            // Màu sắc chuyển động (HEX format)
+            colorPalette: [
+                '#FF6B6B', // Đỏ cam
+                '#4ECDC4', // Xanh ngọc
+                '#FFD166', // Vàng
+                '#06D6A0', // Xanh lá neon
+                '#118AB2', // Xanh dương
+                '#9D4EDD', // Tím
+                '#FF0055', // Hồng neon
+                '#00FFAA'  // Xanh neon
+            ],
+            
+            // Biểu tượng trang trí
+            symbols: ['✨', '⚡', '🌟', '🎨', '🚀', '💻', '🔥', '🎯'],
+            
+            // Hiệu ứng chữ
+            effects: [
+                'gradient',    // Gradient màu
+                'neon',        // Neon nhấp nháy
+                'rainbow',     // Cầu vồng
+                'cyber',       // Cyberpunk
+                'glitch'       // Hiệu ứng lỗi
+            ],
+            
+            // Tốc độ thay đổi (ms)
+            speed: 3000
+        };
+        
+        // ========== HIỆU ỨNG GRADIENT CHO TITLE ==========
+        class ColorTitle {
+            constructor() {
+                this.baseTitle = "Hoàng Quốc Khánh | KHANHPC";
+                this.currentEffect = 0;
+                this.colorIndex = 0;
+                this.symbolIndex = 0;
+                this.isGlitching = false;
+                this.init();
+            }
+            
+            init() {
+                // Bắt đầu với hiệu ứng đầu tiên
+                this.applyEffect();
+                
+                // Tự động đổi hiệu ứng
+                setInterval(() => {
+                    this.nextEffect();
+                }, CONFIG.speed);
+                
+                // Thêm hiệu ứng khi tab active/inactive
+                this.addTabEvents();
+            }
+            
+            applyEffect() {
+                const effect = CONFIG.effects[this.currentEffect];
+                
+                switch(effect) {
+                    case 'gradient':
+                        this.gradientEffect();
+                        break;
+                    case 'neon':
+                        this.neonEffect();
+                        break;
+                    case 'rainbow':
+                        this.rainbowEffect();
+                        break;
+                    case 'cyber':
+                        this.cyberEffect();
+                        break;
+                    case 'glitch':
+                        this.glitchEffect();
+                        break;
+                }
+            }
+            
+            // ========== HIỆU ỨNG GRADIENT ==========
+            gradientEffect() {
+                const color1 = CONFIG.colorPalette[this.colorIndex];
+                const color2 = CONFIG.colorPalette[(this.colorIndex + 1) % CONFIG.colorPalette.length];
+                const symbol = CONFIG.symbols[this.symbolIndex];
+                
+                // Tạo title với biểu tượng gradient (mô phỏng)
+                document.title = `${symbol} ${this.baseTitle} ${symbol}`;
+                
+                // Đổi màu theme (hiển thị trên một số trình duyệt)
+                this.updateThemeColor(color1);
+                
+                this.colorIndex = (this.colorIndex + 1) % CONFIG.colorPalette.length;
+                this.symbolIndex = (this.symbolIndex + 1) % CONFIG.symbols.length;
+            }
+            
+            // ========== HIỆU ỨNG NEON ==========
+            neonEffect() {
+                const colors = ['#FF0055', '#00FFAA', '#0080FF', '#FFAA00'];
+                const neonSymbols = ['✨', '⚡', '🌟', '🔥'];
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const symbol = neonSymbols[Math.floor(Math.random() * neonSymbols.length)];
+                
+                // Neon nhấp nháy
+                document.title = `${symbol} ${this.baseTitle} ${symbol}`;
+                
+                setTimeout(() => {
+                    document.title = `★ ${this.baseTitle} ★`;
+                }, 500);
+                
+                this.updateThemeColor(color);
+            }
+            
+            // ========== HIỆU ỨNG CẦU VỒNG ==========
+            rainbowEffect() {
+                const rainbowSymbols = ['🌈', '🎨', '✨', '⚡'];
+                const symbol = rainbowSymbols[this.symbolIndex % rainbowSymbols.length];
+                
+                // Title với cầu vồng
+                const titles = [
+                    `🌈 ${this.baseTitle} 🎨`,
+                    `🎨 ${this.baseTitle} ✨`,
+                    `✨ ${this.baseTitle} 🌈`,
+                    `⚡ ${this.baseTitle} 🎨`
+                ];
+                
+                document.title = titles[this.symbolIndex % titles.length];
+                
+                // Màu cầu vồng
+                const hue = (Date.now() / 50) % 360;
+                this.updateThemeColor(`hsl(${hue}, 100%, 50%)`);
+                
+                this.symbolIndex++;
+            }
+            
+            // ========== HIỆU ỨNG CYBERPUNK ==========
+            cyberEffect() {
+                const cyberSymbols = ['⟠', '⏣', '⌬', '⎔', '⚡'];
+                const glitchText = this.baseTitle;
+                
+                // Hiệu ứng glitch nhẹ
+                document.title = `${cyberSymbols[2]} ${glitchText} ${cyberSymbols[0]}`;
+                
+                setTimeout(() => {
+                    document.title = `${cyberSymbols[3]} ${glitchText} ${cyberSymbols[1]}`;
+                }, 300);
+                
+                this.updateThemeColor('#00FFAA');
+            }
+            
+            // ========== HIỆU ỨNG GLITCH ==========
+            glitchEffect() {
+                if (this.isGlitching) return;
+                
+                this.isGlitching = true;
+                const originalTitle = document.title;
+                const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                
+                // Tạo hiệu ứng glitch
+                let glitchCount = 0;
+                const glitchInterval = setInterval(() => {
+                    let glitched = '';
+                    for (let i = 0; i < this.baseTitle.length; i++) {
+                        if (Math.random() > 0.7) {
+                            glitched += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        } else {
+                            glitched += this.baseTitle[i];
+                        }
+                    }
+                    document.title = `⚠ ${glitched} ⚠`;
+                    glitchCount++;
+                    
+                    if (glitchCount > 5) {
+                        clearInterval(glitchInterval);
+                        document.title = originalTitle;
+                        this.isGlitching = false;
+                    }
+                }, 100);
+                
+                this.updateThemeColor('#FF0055');
+            }
+            
+            // ========== CHUYỂN HIỆU ỨNG TIẾP THEO ==========
+            nextEffect() {
+                this.currentEffect = (this.currentEffect + 1) % CONFIG.effects.length;
+                this.applyEffect();
+            }
+            
+            // ========== CẬP NHẬT MÀU THEME ==========
+            updateThemeColor(color) {
+                // Xóa theme-color cũ nếu có
+                document.querySelector('meta[name="theme-color"]')?.remove();
+                
+                // Thêm theme-color mới
+                const metaTheme = document.createElement('meta');
+                metaTheme.name = 'theme-color';
+                metaTheme.content = color;
+                document.head.appendChild(metaTheme);
+            }
+            
+            // ========== SỰ KIỆN TAB ==========
+            addTabEvents() {
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        // Khi tab không active
+                        document.title = `⏸ ${this.baseTitle}`;
+                    } else {
+                        // Khi tab được active lại
+                        document.title = `▶ ${this.baseTitle} ✨`;
+                        setTimeout(() => this.applyEffect(), 1000);
+                    }
+                });
+            }
+        }
+        
+        // ========== KHỞI CHẠY ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tạo hiệu ứng cho title
+            new ColorTitle();
+            
+            // Log thông báo cool ngầu
+            console.log('%c🎨 Title Animation Active!', 
+                'color: #FF6B6B; font-size: 16px; font-weight: bold;');
+            console.log('%c✨ "Hoàng Quốc Khánh | KHANHPC" đang được tô điểm!', 
+                'color: #4ECDC4;');
+        });
+    </script>
+
 </body>
 </html>
