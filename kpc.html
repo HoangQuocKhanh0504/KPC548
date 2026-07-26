@@ -1,232 +1,1254 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Hoàng Quốc Khánh</title>
-<link rel="icon" type="image/png" href="khanhpc.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  min-height:100vh;
-  background:#060612;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:0 0 52px;
-  overflow-x:hidden;
-}
-.bg-art{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(80px)}
-.b1{width:320px;height:320px;background:rgba(99,58,255,0.35);top:-80px;left:-80px;animation:bm1 9s ease-in-out infinite alternate}
-.b2{width:280px;height:280px;background:rgba(236,72,153,0.28);bottom:-60px;right:-60px;animation:bm2 11s ease-in-out infinite alternate}
-.b3{width:200px;height:200px;background:rgba(6,182,212,0.18);top:50%;left:50%;transform:translate(-50%,-50%);animation:bm3 13s ease-in-out infinite alternate}
-@keyframes bm1{to{transform:translate(40px,30px) scale(1.1)}}
-@keyframes bm2{to{transform:translate(-30px,-40px) scale(0.9)}}
-@keyframes bm3{to{transform:translate(-60%,-40%) scale(1.2)}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>KHANHPC · 2026</title>
+    <link rel="icon" href="KHANHPC.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.cover{
-  width:100%;height:220px;
-  border-radius:0 0 36px 36px;
-  background:linear-gradient(135deg,#3b1fa8 0%,#7c3aed 40%,#db2777 80%,#f97316 100%);
-  position:relative;overflow:hidden;flex-shrink:0;
-}
-.cover-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
-  background-size:36px 36px;
-}
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-x: hidden;
+        }
 
-.wrap{position:relative;z-index:1;width:100%;max-width:430px;padding:0 18px}
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(255,0,200,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0,200,255,0.08) 0%, transparent 60%);
+        }
 
-.avatar-section{display:flex;flex-direction:column;align-items:center;margin-top:-58px}
-.avatar-outer{
-  width:112px;height:112px;border-radius:50%;padding:3px;
-  background:linear-gradient(135deg,#7c3aed,#db2777,#f97316);
-  box-shadow:0 0 0 5px #060612;
-  animation:pop 0.65s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-@keyframes pop{from{opacity:0;transform:scale(0.5) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.avatar-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:#1e1b4b}
-.avatar-inner img{width:100%;height:100%;object-fit:cover;display:block}
-.av-fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:34px;color:#fff;background:linear-gradient(135deg,#4c1d95,#831843)}
+        .shooting-star {
+            position: fixed;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shoot 6s linear infinite;
+            z-index: 0;
+            opacity: 0;
+        }
 
-.name{margin-top:16px;font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.03em;text-align:center;animation:up 0.5s 0.15s both}
-.handle{margin-top:3px;font-size:13px;color:rgba(255,255,255,0.4);font-weight:500;animation:up 0.5s 0.2s both}
-.bio{margin-top:10px;text-align:center;font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:290px;animation:up 0.5s 0.25s both}
+        .shooting-star:nth-child(1) { top: 10%; left: 70%; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 30%; left: 50%; animation-delay: 3s; }
+        .shooting-star:nth-child(3) { top: 60%; left: 80%; animation-delay: 1.5s; }
 
-.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:14px;animation:up 0.5s 0.3s both}
-.pill{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.11);border-radius:100px;padding:5px 13px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.65)}
+        @keyframes shoot {
+            0% { transform: translateX(0) rotate(-45deg); opacity: 0; }
+            10% { opacity: 1; }
+            20% { opacity: 0; }
+            100% { transform: translateX(-300px) rotate(-45deg); opacity: 0; }
+        }
 
-.links{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:26px;animation:up 0.5s 0.35s both}
+        .container {
+            max-width: 360px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
 
-.lnk{
-  display:flex;align-items:center;gap:13px;
-  padding:13px 15px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  text-decoration:none;color:#fff;
-  position:relative;overflow:hidden;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform 0.1s;
-  cursor:pointer;
-}
-.lnk.tapped{transform:scale(0.97)}
+        .glow {
+            padding: 2px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #ff00ff, #00ffff, #ff00ff);
+            background-size: 300% 300%;
+            animation: flow 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(255,0,200,0.1);
+            transition: all 0.5s;
+        }
 
-/* Ripple */
-.ripple{
-  position:absolute;border-radius:50%;
-  background:rgba(255,255,255,0.18);
-  transform:scale(0);
-  animation:ripple-anim 0.55s linear;
-  pointer-events:none;
-}
-@keyframes ripple-anim{
-  to{transform:scale(4);opacity:0}
-}
+        .glow:hover {
+            box-shadow: 0 0 60px rgba(255,0,200,0.2);
+        }
 
-.lnk-ico{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.lnk-ico svg{display:block}
+        @keyframes flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-.lnk-text{flex:1;min-width:0}
-.lnk-name{font-size:15px;font-weight:700;color:#fff;display:block;line-height:1.2}
-.lnk-sub{font-size:12px;color:rgba(255,255,255,0.38);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lnk-arr{color:rgba(255,255,255,0.22);flex-shrink:0}
+        .card {
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 26px;
+            padding: 28px 20px 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
 
-.ic-web {background:linear-gradient(135deg,#4f46e5,#7c3aed)}
-.ic-fb  {background:#1877f2}
-.ic-gh  {background:linear-gradient(135deg,#24292e,#444d56)}
-.ic-zalo{background:#0068ff}
-.ic-tt  {background:#010101}
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255,0,200,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
 
-.footer{margin-top:30px;text-align:center;font-size:12px;color:rgba(255,255,255,0.16);font-weight:500;animation:up 0.5s 0.55s both}
-@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-</style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .name span {
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: #00ff88;
+            font-weight: 600;
+            background: rgba(0,255,136,0.08);
+            padding: 4px 12px;
+            border-radius: 100px;
+            border: 1px solid rgba(0,255,136,0.1);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { border-color: rgba(0,255,136,0.1); }
+            50% { border-color: rgba(0,255,136,0.3); }
+        }
+
+        .status .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.04);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .profile:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .avatar-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            border-color: #ff00ff;
+            transform: scale(1.05);
+        }
+
+        .ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1.5px solid transparent;
+            border-top-color: #ff00ff;
+            border-bottom-color: #00ffff;
+            animation: spin 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .info p {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .info .tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .info .tags span {
+            font-size: 8px;
+            padding: 2px 10px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+        }
+
+        .info .tags span.active {
+            border-color: rgba(255,0,200,0.2);
+            color: #ff66cc;
+        }
+
+        .info .tags span:hover {
+            border-color: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .btn-profile {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, rgba(255,0,200,0.12), rgba(0,200,255,0.12));
+            border: 1px solid rgba(255,0,200,0.2);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: glowBtn 2s infinite;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-profile::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .btn-profile:hover::before {
+            transform: translateX(100%);
+        }
+
+        @keyframes glowBtn {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,0,200,0.05); }
+            50% { box-shadow: 0 0 30px rgba(255,0,200,0.15); }
+        }
+
+        .btn-profile:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, rgba(255,0,200,0.2), rgba(0,200,255,0.2));
+        }
+
+        .btn-profile:active {
+            transform: scale(0.97);
+        }
+
+        .btn-profile i {
+            font-size: 16px;
+            color: #ff66cc;
+        }
+
+        .btn-profile .arrow {
+            margin-left: auto;
+            color: #666;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-profile:hover .arrow {
+            color: #ff66cc;
+            transform: translateX(4px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .stat:hover {
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .stat .num {
+            font-size: 20px;
+            font-weight: 800;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .stat:hover .num {
+            transform: scale(1.1);
+        }
+
+        .stat .num.g1 { background: linear-gradient(135deg, #ff00ff, #ff6600); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .num.g2 { background: linear-gradient(135deg, #00ffff, #0066ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .num.g3 { background: linear-gradient(135deg, #00ff88, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .stat .lbl {
+            font-size: 9px;
+            color: #666;
+            font-weight: 500;
+            margin-top: 2px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .link:hover::after {
+            transform: translateX(100%);
+        }
+
+        .link:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(4px);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .link:active {
+            transform: scale(0.98);
+        }
+
+        .link .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .link:hover .icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .link .icon.tt { background: linear-gradient(135deg, #ff0044, #00f2ea); }
+        .link .icon.fb { background: #1877f2; }
+        .link .icon.gh { background: #1a1a1a; }
+        .link .icon.zl { background: #0068ff; }
+        .link .icon.ws { background: linear-gradient(135deg, #ff00cc, #6600ff); }
+        .link .icon.yt { background: #ff0000; }
+
+        .link .text {
+            flex: 1;
+        }
+
+        .link .text .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+        }
+
+        .link .text .desc {
+            font-size: 10px;
+            color: #666;
+            display: block;
+        }
+
+        .link .arrow {
+            color: #333;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .link:hover .arrow {
+            color: #666;
+            transform: translateX(4px);
+        }
+
+        /* ===== MUSIC PLAYER ===== */
+        .music-player {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .music-player:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .music-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,0,200,0.15), rgba(0,200,255,0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #ff66cc;
+            flex-shrink: 0;
+            animation: musicPulse 1.5s infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .music-info {
+            flex: 1;
+        }
+
+        .music-info .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+        }
+
+        .music-info .artist {
+            font-size: 10px;
+            color: #666;
+            display: block;
+            margin-top: 1px;
+        }
+
+        .music-bar {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 24px;
+        }
+
+        .music-bar .bar {
+            width: 3px;
+            background: linear-gradient(180deg, #ff66cc, #66ccff);
+            border-radius: 3px;
+            animation: barAnim 1s ease-in-out infinite;
+        }
+
+        .music-bar .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .music-bar .bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+        .music-bar .bar:nth-child(3) { height: 14px; animation-delay: 0.4s; }
+        .music-bar .bar:nth-child(4) { height: 20px; animation-delay: 0.6s; }
+        .music-bar .bar:nth-child(5) { height: 12px; animation-delay: 0.8s; }
+
+        @keyframes barAnim {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 10px;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer .heart {
+            color: #ff0044;
+            display: inline-block;
+            animation: heartBeat 1s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .footer a {
+            color: #444;
+            margin: 0 6px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        /* ===== POPUP ===== */
+        .popup {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(30px);
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-box {
+            max-width: 360px;
+            width: 100%;
+            background: linear-gradient(145deg, #141414, #0a0a0a);
+            border-radius: 32px;
+            padding: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .popup.active .popup-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, rgba(255,0,200,0.15), rgba(0,200,255,0.15));
+            padding: 32px 24px 24px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .popup-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,0,200,0.3), transparent);
+        }
+
+        .popup-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            display: block;
+            border: 3px solid rgba(255,0,200,0.3);
+            box-shadow: 0 0 40px rgba(255,0,200,0.1);
+            transition: 0.3s;
+        }
+
+        .popup-avatar:hover {
+            transform: scale(1.05);
+            border-color: #ff00ff;
+        }
+
+        .popup-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .popup-handle {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .popup-handle i {
+            color: #555;
+            margin-right: 4px;
+        }
+
+        .popup-body {
+            padding: 24px;
+        }
+
+        .popup-bio {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.7;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 20px;
+        }
+
+        .popup-bio strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .popup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .popup-grid .item {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+        }
+
+        .popup-grid .item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+
+        .popup-grid .item .icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .popup-grid .item .icon.pink { color: #ff66cc; }
+        .popup-grid .item .icon.blue { color: #66ccff; }
+        .popup-grid .item .icon.green { color: #66ff88; }
+        .popup-grid .item .icon.orange { color: #ff8844; }
+
+        .popup-grid .item .lbl {
+            font-size: 9px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .popup-grid .item .val {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 700;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .close-popup {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(255,0,200,0.1), rgba(0,200,255,0.1));
+            border: 1px solid rgba(255,0,200,0.15);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .close-popup:hover {
+            background: linear-gradient(135deg, rgba(255,0,200,0.2), rgba(0,200,255,0.2));
+            border-color: rgba(255,0,200,0.3);
+        }
+
+        .close-popup:active {
+            transform: scale(0.97);
+        }
+
+        .close-popup i {
+            color: #ff66cc;
+        }
+
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.5s;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.05);
+            border-top-color: #ff00ff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 24px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast i {
+            color: #ff66cc;
+            font-size: 16px;
+        }
+
+        /* ===== HIỆU ỨNG TITLE ===== */
+        .title-music-active {
+            animation: titleShake 0.3s infinite alternate;
+        }
+
+        @keyframes titleShake {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        @media (max-width: 380px) {
+            .card { padding: 20px 14px; }
+            .profile { padding: 12px; }
+            .avatar { width: 56px; height: 56px; }
+            .stats { gap: 6px; }
+            .stat { padding: 10px; }
+            .stat .num { font-size: 17px; }
+            .popup-header { padding: 24px 20px 20px; }
+            .popup-body { padding: 20px; }
+            .popup-grid { gap: 8px; }
+            .popup-grid .item { padding: 12px 10px; }
+            .music-player { padding: 10px 14px; }
+            .music-icon { width: 34px; height: 34px; font-size: 15px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="bg-art">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
+<div class="bg"></div>
+
+<div class="shooting-star"></div>
+<div class="shooting-star"></div>
+<div class="shooting-star"></div>
+
+<div class="loading" id="loading">
+    <div class="loader"></div>
 </div>
 
-<div class="cover"><div class="cover-grid"></div></div>
+<div class="container">
+    <div class="glow">
+        <div class="card">
 
-<div class="wrap">
-  <div class="avatar-section">
-    <div class="avatar-outer">
-      <div class="avatar-inner">
-        <img src="khanhpc.png" alt="Hoàng Quốc Khánh" onerror="this.style.display='none';document.getElementById('avfb').style.display='flex'">
-        <div class="av-fb" id="avfb" style="display:none">HQK</div>
-      </div>
+            <div class="header">
+                <div class="name"><span>KHANHPC</span></div>
+                <div class="status">
+                    <span class="dot"></span>
+                    Online
+                </div>
+            </div>
+
+            <div class="profile">
+                <div class="avatar-wrap">
+                    <div class="ring"></div>
+                    <img class="avatar" src="KHANHPC.png" alt="KHANHPC"
+                         onerror="this.src='https://ui-avatars.com/api/?name=HK&background=1a1a1a&color=fff&size=64'">
+                </div>
+                <div class="info">
+                    <h3>Hoàng Quốc Khánh</h3>
+                    <p><i class="fas fa-at" style="color:#555;margin-right:4px;"></i>khanhpc</p>
+                    <div class="tags">
+                        <span class="active">Developer</span>
+                        <span>Creator</span>
+                        <span>Freelancer</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-profile" id="openPopup">
+                <i class="fas fa-user-circle"></i>
+                Xem thông tin chi tiết
+                <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+            </button>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="num g1" id="repoCount">12</span>
+                    <span class="lbl">Dự án</span>
+                </div>
+                <div class="stat">
+                    <span class="num g2">6</span>
+                    <span class="lbl">Năm Kinh Nghiệm</span>
+                </div>
+                <div class="stat">
+                    <span class="num g3">∞</span>
+                    <span class="lbl">Đam mê</span>
+                </div>
+            </div>
+
+            <!-- ===== MUSIC PLAYER ===== -->
+            <div class="music-player" id="musicPlayer">
+                <div class="music-icon" id="musicIcon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div class="music-info">
+                    <span class="title" id="musicTitle">Tên bài hát</span>
+                    <span class="artist" id="musicArtist">Tên nghệ sĩ</span>
+                </div>
+                <div class="music-bar" id="musicBar">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+
+            <!-- ===== AUDIO PLAYER ẨN ===== -->
+            <audio id="audioPlayer" loop>
+                <!-- ⬇️ THAY ĐƯỜNG DẪN FILE NHẠC CỦA BẠN VÀO ĐÂY ⬇️ -->
+                <source src="nhac-cua-ban.mp3" type="audio/mpeg">
+                Trình duyệt của bạn không hỗ trợ audio.
+            </audio>
+
+            <div class="links">
+                <a href="https://aikhanh.onrender.com/" class="link" target="_blank">
+                    <span class="icon ws"><i class="fas fa-globe"></i></span>
+                    <span class="text">
+                        <span class="title">Website</span>
+                        <span class="desc">Portfolio</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="https://www.youtube.com/@KhanhPC-k8" class="link" target="_blank">
+                    <span class="icon yt"><i class="fab fa-youtube"></i></span>
+                    <span class="text">
+                        <span class="title">YouTube</span>
+                        <span class="desc">Video &amp; Content</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="https://www.tiktok.com/@ke_tung_tin_vao_tinh_yeu" class="link" target="_blank">
+                    <span class="icon tt"><i class="fab fa-tiktok"></i></span>
+                    <span class="text">
+                        <span class="title">TikTok</span>
+                        <span class="desc">Video</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="https://www.facebook.com/khanhpc548" class="link" target="_blank">
+                    <span class="icon fb"><i class="fab fa-facebook-f"></i></span>
+                    <span class="text">
+                        <span class="title">Facebook</span>
+                        <span class="desc">Kết nối</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="https://github.com/HoangQuocKhanh0504" class="link" target="_blank">
+                    <span class="icon gh"><i class="fab fa-github"></i></span>
+                    <span class="text">
+                        <span class="title">GitHub</span>
+                        <span class="desc">Mã nguồn</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="https://zalo.me/0924944845" class="link" target="_blank">
+                    <span class="icon zl"><i class="fas fa-comment-dots"></i></span>
+                    <span class="text">
+                        <span class="title">Zalo</span>
+                        <span class="desc">Liên hệ</span>
+                    </span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+
+            <div class="footer">
+                <span class="heart">❤</span> 2026 KHANHPC
+                <a href="https://github.com/HoangQuocKhanh0504" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.tiktok.com/@ke_tung_tin_vao_tinh_yeu" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <span class="heart">❤</span>
+            </div>
+
+        </div>
     </div>
-    <h1 class="name">Hoàng Quốc Khánh</h1>
-    <p class="handle">@khanhpc548</p>
-    <p class="bio">Developer &amp; Creator · Xây dựng những thứ thú vị từ TP. Hồ Chí Minh 🇻🇳</p>
-    <div class="pills">
-      <span class="pill">💻 Dev</span>
-      <span class="pill">🎨 Design</span>
-      <span class="pill">🚀 Builder</span>
+</div>
+
+<!-- ===== POPUP ===== -->
+<div class="popup" id="popup">
+    <div class="popup-box">
+        
+        <div class="popup-header">
+            <img class="popup-avatar" src="KHANHPC.png" alt="KHANHPC"
+                 onerror="this.src='https://ui-avatars.com/api/?name=HK&background=1a1a1a&color=fff&size=80'">
+            <div class="popup-name">Hoàng Quốc Khánh</div>
+            <div class="popup-handle"><i class="fas fa-at"></i> khanhpc</div>
+        </div>
+
+        <div class="popup-body">
+            <div class="popup-bio">
+                <strong>Full-Stack Developer</strong> 🚀<br>
+                Đam mê công nghệ &amp; sáng tạo không giới hạn
+            </div>
+
+            <div class="popup-grid">
+                <div class="item">
+                    <span class="icon pink"><i class="fas fa-code"></i></span>
+                    <span class="lbl">Nghề nghiệp</span>
+                    <span class="val">Developer</span>
+                </div>
+                <div class="item">
+                    <span class="icon blue"><i class="fas fa-map-pin"></i></span>
+                    <span class="lbl">Đến từ</span>
+                    <span class="val">Việt Nam</span>
+                </div>
+                <div class="item">
+                    <span class="icon green"><i class="fas fa-heart"></i></span>
+                    <span class="lbl">Sở thích</span>
+                    <span class="val">Coding · Music</span>
+                </div>
+                <div class="item">
+                    <span class="icon orange"><i class="fas fa-calendar"></i></span>
+                    <span class="lbl">Kinh nghiệm</span>
+                    <span class="val">6 năm</span>
+                </div>
+            </div>
+
+            <button class="close-popup" id="closePopup">
+                <i class="fas fa-times"></i> Đóng
+            </button>
+        </div>
+
     </div>
-  </div>
+</div>
 
-  <div class="links">
-
-    <!-- Website -->
-    <a class="lnk" href="https://aikhanh.onrender.com/" target="_blank" rel="noopener">
-      <span class="lnk-ico ic-web">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
-          <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-      </span>
-      <span class="lnk-text">
-        <span class="lnk-name">Website cá nhân</span>
-        <span class="lnk-sub">aikhanh.onrender.com</span>
-      </span>
-      <span class="lnk-arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
-    </a>
-
-    <!-- Facebook -->
-    <a class="lnk" href="https://www.facebook.com/khanhpc548" target="_blank" rel="noopener">
-      <span class="lnk-ico ic-fb">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-        </svg>
-      </span>
-      <span class="lnk-text">
-        <span class="lnk-name">Facebook</span>
-        <span class="lnk-sub">facebook.com/khanhpc548</span>
-      </span>
-      <span class="lnk-arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
-    </a>
-
-    <!-- GitHub -->
-    <a class="lnk" href="https://github.com/HoangQuocKhanh0504" target="_blank" rel="noopener">
-      <span class="lnk-ico ic-gh">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
-          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
-        </svg>
-      </span>
-      <span class="lnk-text">
-        <span class="lnk-name">GitHub</span>
-        <span class="lnk-sub">HoangQuocKhanh0504</span>
-      </span>
-      <span class="lnk-arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
-    </a>
-
-    <!-- Zalo -->
-    <a class="lnk" href="https://zalo.me/0924944845" target="_blank" rel="noopener">
-      <span class="lnk-ico ic-zalo">
-        <svg width="30" height="18" viewBox="0 0 60 28" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h14.5L5.8 17.2H15V28H0.2L9 10.8H0V0zm17 0h5.5v28H17V0zm8 0h12c5.5 0 8 2.8 8 7.5 0 3-1.3 5.3-3.5 6.5L46 28h-6.2l-4-13H30.5V28H25V0zm5.5 5.5v9H35c2.5 0 4-1.3 4-4.5s-1.5-4.5-4-4.5h-4.5zm20.5-5.5h6L60 28h-5.5l-1-6H47l-1 6h-5.5L46 0zm5 17l-2.5-13.5L48.5 17H51z"/>
-        </svg>
-      </span>
-      <span class="lnk-text">
-        <span class="lnk-name">Zalo</span>
-        <span class="lnk-sub">0924 944 845</span>
-      </span>
-      <span class="lnk-arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
-    </a>
-
-    <!-- TikTok -->
-    <a class="lnk" href="https://www.tiktok.com/@hoang_quoc_khanh_2008" target="_blank" rel="noopener">
-      <span class="lnk-ico ic-tt">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.78a4.85 4.85 0 0 1-1.01-.09z"/>
-        </svg>
-      </span>
-      <span class="lnk-text">
-        <span class="lnk-name">TikTok</span>
-        <span class="lnk-sub">@hoang_quoc_khanh_2008</span>
-      </span>
-      <span class="lnk-arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
-    </a>
-
-  </div>
-
-  <p class="footer">© 2026 Hoàng Quốc Khánh</p>
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">
+    <i class="fas fa-music"></i>
+    <span id="toastMsg">🎵 Đang phát nhạc</span>
 </div>
 
 <script>
-document.querySelectorAll('.lnk').forEach(btn => {
-  btn.addEventListener('touchstart', function(e) {
-    const touch = e.touches[0];
-    const rect = this.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 1.5;
-    const x = touch.clientX - rect.left - size / 2;
-    const y = touch.clientY - rect.top - size / 2;
-    const ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
-    this.appendChild(ripple);
-    this.classList.add('tapped');
-    setTimeout(() => { ripple.remove(); this.classList.remove('tapped'); }, 550);
-  }, {passive: true});
-});
+    // ========================================
+    // CẤU HÌNH NHẠC - THAY ĐỔI THÔNG TIN Ở ĐÂY
+    // ========================================
+    const MUSIC_CONFIG = {
+        title: 'Lofi Chill',  // 👈 Đổi tên bài hát
+        artist: 'KPC',         // 👈 Đổi tên nghệ sĩ
+        file: 'chill.mp3'       // 👈 Đổi tên file nhạc (cùng thư mục với file HTML)
+    };
+
+    // ========================================
+    // LẤY SỐ REPO TỪ GITHUB
+    // ========================================
+    const GITHUB_API = 'https://api.github.com/users/HoangQuocKhanh0504';
+
+    async function fetchRepoCount() {
+        const repoElement = document.getElementById('repoCount');
+        if (!repoElement) return;
+
+        try {
+            const response = await fetch(GITHUB_API);
+            if (!response.ok) throw new Error('Lỗi kết nối GitHub');
+            const data = await response.json();
+            const count = data.public_repos || 0;
+            repoElement.textContent = count ;
+        } catch (error) {
+            console.warn('Không thể lấy số repo từ GitHub:', error);
+            // Giữ nguyên số mặc định nếu lỗi
+        }
+    }
+
+    // ========================================
+    // CODE CHÍNH
+    // ========================================
+    
+    // Loading
+    const loading = document.getElementById('loading');
+    window.addEventListener('load', () => {
+        setTimeout(() => loading.classList.add('hide'), 400);
+        setTimeout(() => showToast('🎵 Đã sẵn sàng!'), 600);
+        initAudio();
+        fetchRepoCount(); // Lấy số repo từ GitHub
+    });
+
+    // ===== HIỆU ỨNG TITLE =====
+    let titleInterval = null;
+    let isTitleAnimating = false;
+
+    function updateTitle(playing) {
+        const titleEl = document.querySelector('title');
+        const baseTitle = 'KHANHPC · 2026';
+        
+        if (playing) {
+            if (!isTitleAnimating) {
+                isTitleAnimating = true;
+                let dots = 0;
+                let direction = 1;
+                
+                titleInterval = setInterval(() => {
+                    dots += direction;
+                    if (dots >= 3) direction = -1;
+                    if (dots <= 0) direction = 1;
+                    
+                    const dotStr = '.'.repeat(dots);
+                    titleEl.textContent = `🎵 ${baseTitle}${dotStr}`;
+                }, 400);
+                
+                document.querySelector('.name').classList.add('title-music-active');
+            }
+        } else {
+            if (titleInterval) {
+                clearInterval(titleInterval);
+                titleInterval = null;
+                isTitleAnimating = false;
+                document.querySelector('title').textContent = baseTitle;
+                document.querySelector('.name').classList.remove('title-music-active');
+            }
+        }
+    }
+
+    // Audio
+    const audio = document.getElementById('audioPlayer');
+    const musicTitle = document.getElementById('musicTitle');
+    const musicArtist = document.getElementById('musicArtist');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicPlayer = document.getElementById('musicPlayer');
+    const bars = document.querySelectorAll('.music-bar .bar');
+    let isPlaying = false;
+
+    function initAudio() {
+        musicTitle.textContent = MUSIC_CONFIG.title;
+        musicArtist.textContent = MUSIC_CONFIG.artist;
+        
+        audio.src = MUSIC_CONFIG.file;
+        audio.load();
+
+        audio.addEventListener('canplaythrough', () => {
+            audio.play().then(() => {
+                isPlaying = true;
+                updateUI(true);
+                updateTitle(true);
+                showToast('🎵 Đang phát: ' + MUSIC_CONFIG.title);
+            }).catch(() => {
+                showToast('👆 Bấm vào player để phát nhạc');
+            });
+        });
+
+        audio.addEventListener('error', () => {
+            showToast('❌ Không tìm thấy file nhạc! Kiểm tra lại đường dẫn.');
+            musicTitle.textContent = '❌ Lỗi file';
+            musicArtist.textContent = 'Không tìm thấy nhạc';
+        });
+    }
+
+    // Click player
+    musicPlayer.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            updateUI(false);
+            updateTitle(false);
+            showToast('⏸️ Đã tạm dừng');
+        } else {
+            audio.play().then(() => {
+                updateUI(true);
+                updateTitle(true);
+                showToast('▶️ Tiếp tục phát');
+            }).catch((e) => {
+                showToast('❌ Không thể phát nhạc');
+                console.log('Lỗi phát nhạc:', e);
+            });
+        }
+        isPlaying = !isPlaying;
+    });
+
+    function updateUI(playing) {
+        const icon = musicIcon.querySelector('i');
+        if (playing) {
+            icon.className = 'fas fa-music';
+            bars.forEach(bar => bar.style.animationPlayState = 'running');
+        } else {
+            icon.className = 'fas fa-pause-circle';
+            bars.forEach(bar => bar.style.animationPlayState = 'paused');
+        }
+    }
+
+    // Toast
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimeout;
+
+    function showToast(msg) {
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Popup
+    const openBtn = document.getElementById('openPopup');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closePopup');
+
+    openBtn.addEventListener('click', () => {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popup.classList.contains('active')) {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 </script>
+
 </body>
 </html>
