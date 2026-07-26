@@ -1149,6 +1149,7 @@
     const musicPlayer = document.getElementById('musicPlayer');
     const bars = document.querySelectorAll('.music-bar .bar');
     let isPlaying = false;
+    let autoPlayAttempted = false;
 
     function initAudio() {
         musicTitle.textContent = MUSIC_CONFIG.title;
@@ -1157,7 +1158,11 @@
         audio.src = MUSIC_CONFIG.file;
         audio.load();
 
-        audio.addEventListener('canplaythrough', () => {
+        // Thử phát nhạc khi người dùng tương tác lần đầu
+        const tryAutoPlay = () => {
+            if (autoPlayAttempted) return;
+            autoPlayAttempted = true;
+            
             audio.play().then(() => {
                 isPlaying = true;
                 updateUI(true);
@@ -1165,6 +1170,34 @@
                 showToast('🎵 Đang phát: ' + MUSIC_CONFIG.title);
             }).catch(() => {
                 showToast('👆 Bấm vào player để phát nhạc');
+            });
+            
+            // Remove listeners sau khi đã thử
+            document.removeEventListener('click', tryAutoPlay);
+            document.removeEventListener('touchstart', tryAutoPlay);
+            document.removeEventListener('keydown', tryAutoPlay);
+        };
+
+        // Lắng nghe tương tác đầu tiên của người dùng
+        document.addEventListener('click', tryAutoPlay);
+        document.addEventListener('touchstart', tryAutoPlay);
+        document.addEventListener('keydown', tryAutoPlay);
+
+        // Nếu file đã load xong trước khi người dùng tương tác
+        audio.addEventListener('canplaythrough', () => {
+            // Thử phát ngay nếu có thể
+            audio.play().then(() => {
+                isPlaying = true;
+                updateUI(true);
+                updateTitle(true);
+                showToast('🎵 Đang phát: ' + MUSIC_CONFIG.title);
+                autoPlayAttempted = true;
+                // Dọn dẹp listeners
+                document.removeEventListener('click', tryAutoPlay);
+                document.removeEventListener('touchstart', tryAutoPlay);
+                document.removeEventListener('keydown', tryAutoPlay);
+            }).catch(() => {
+                // Chờ người dùng tương tác
             });
         });
 
@@ -1251,4 +1284,4 @@
 </script>
 
 </body>
-</html>
+</html>s
