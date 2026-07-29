@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KPC Executor</title>
+    <link rel="icon" href="KHANHPC.png" type="image/png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background động - hiệu ứng ánh sáng nền */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, #00f0ff08 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, #8b00ff08 0%, transparent 50%);
+            animation: bgMove 10s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes bgMove {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(2%, 2%) rotate(3deg);
+            }
+        }
+
+        /* Container chính */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            width: 100%;
+            background: linear-gradient(145deg, #111111, #0d0d0d);
+            padding: 55px 45px;
+            border-radius: 28px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 0 80px #00f0ff11, inset 0 0 80px #00f0ff05;
+            backdrop-filter: blur(2px);
+            transition: 0.5s;
+        }
+
+        .container:hover {
+            border-color: #00f0ff33;
+            box-shadow: 0 0 100px #00f0ff22, inset 0 0 100px #00f0ff0a;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+
+        .logo .kpc {
+            color: #00f0ff;
+            text-shadow: 0 0 60px #00f0ff66, 0 0 120px #00f0ff22;
+            display: inline-block;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .logo .executor {
+            color: #8b00ff;
+            text-shadow: 0 0 60px #8b00ff66, 0 0 120px #8b00ff22;
+            display: inline-block;
+            animation: glowPulse 3s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes glowPulse {
+            0%,
+            100% {
+                text-shadow: 0 0 40px currentColor44, 0 0 80px currentColor22;
+            }
+            50% {
+                text-shadow: 0 0 80px currentColor88, 0 0 160px currentColor44;
+            }
+        }
+
+        /* Tia chớp nhỏ trang trí */
+        .lightning {
+            font-size: 28px;
+            display: inline-block;
+            animation: flash 2s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%,
+            90%,
+            100% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 0.2;
+            }
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 18px;
+            color: #666;
+            margin: 12px 0 30px;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-weight: 300;
+            border-top: 1px solid #222;
+            padding-top: 16px;
+            display: inline-block;
+        }
+
+        /* Đường kẻ trang trí */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00f0ff, #8b00ff);
+            margin: 0 auto 28px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px #00f0ff44;
+        }
+
+        /* Mô tả */
+        .desc {
+            font-size: 16.5px;
+            color: #ccc;
+            line-height: 2;
+            margin-bottom: 32px;
+            background: #0a0a0a88;
+            padding: 20px 24px;
+            border-radius: 16px;
+            border: 1px solid #1a1a1a;
+            backdrop-filter: blur(4px);
+        }
+
+        .desc .highlight {
+            color: #00f0ff;
+            font-weight: 700;
+            text-shadow: 0 0 20px #00f0ff33;
+        }
+
+        .desc .highlight2 {
+            color: #8b00ff;
+            font-weight: 700;
+            text-shadow: 0 0 20px #8b00ff33;
+        }
+
+        /* Danh sách game nhỏ gọn */
+        .games {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .games span {
+            background: #1a1a1a;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #888;
+            border: 1px solid #222;
+            transition: 0.3s;
+            cursor: default;
+        }
+
+        .games span:hover {
+            border-color: #8b00ff66;
+            color: #fff;
+            box-shadow: 0 0 20px #8b00ff22;
+        }
+
+        /* Nút */
+        .btn {
+            display: inline-block;
+            padding: 16px 55px;
+            background: linear-gradient(135deg, #00f0ff, #0088cc);
+            color: #0a0a0a;
+            font-weight: 800;
+            font-size: 18px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: 0.4s;
+            letter-spacing: 1px;
+            box-shadow: 0 0 30px #00f0ff33;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, #ffffff33 0%, transparent 60%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 60px #00f0ff66, 0 0 120px #00f0ff33;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 32px;
+            font-size: 12px;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .footer span {
+            color: #00f0ff33;
+        }
+
+        /* Responsive */
+        @media (max-width: 550px) {
+            .container {
+                padding: 35px 22px;
+                border-radius: 20px;
+            }
+            .logo {
+                font-size: 42px;
+            }
+            .desc {
+                font-size: 14.5px;
+                padding: 16px 14px;
+            }
+            .btn {
+                padding: 14px 38px;
+                font-size: 16px;
+            }
+            .games span {
+                font-size: 11px;
+                padding: 4px 14px;
+            }
+            .tagline {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .logo {
+                font-size: 32px;
+            }
+            .container {
+                padding: 25px 16px;
+            }
+            .desc {
+                font-size: 13px;
+                line-height: 1.8;
+            }
+            .btn {
+                padding: 12px 28px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <span class="lightning">⚡</span>
+            <span class="kpc">KPC</span><br />
+            <span class="executor">EXECUTOR</span>
+        </div>
+
+        <p class="tagline">✦ Your Script - Your Way ✦</p>
+
+        <div class="divider"></div>
+
+        <!-- Giới thiệu -->
+        <div class="desc">
+            Nhận làm <span class="highlight">custom script Roblox</span> theo yêu cầu.<br />
+            📩 Inbox tên game + tính năng muốn hack → báo giá nhanh <span class="highlight">5-10 phút</span>.<br />
+            📦 Bàn giao script kèm hướng dẫn chi tiết, hỗ trợ nếu lỗi.<br />
+            <span class="highlight2">⚡ Không có game nào là không thể! ⚡</span>
+        </div>
+
+        <!-- Danh sách game -->
+        <div class="games">
+            <span>Blox Fruits</span>
+            <span>Pet Sim X</span>
+            <span>Anime Vanguards</span>
+            <span>King Legacy</span>
+            <span>ASTD</span>
+            <span>+ nhiều game</span>
+        </div>
+
+        <!-- Nút -->
+        <a href="KPC.html" class="btn">📩 INBOX NGAY</a>
+
+        <p class="footer">© 2026 <span>KPC Executor</span> — All rights reserved</p>
+    </div>
+
+</body>
+</html>
