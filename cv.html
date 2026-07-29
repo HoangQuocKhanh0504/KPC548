@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV · Hoàng Quốc Khánh · Kỹ thuật viên PC</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #cc44ff, #0068ff);
+            border-radius: 10px;
+        }
+
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 40%, rgba(0,200,255,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 60%, rgba(255,0,200,0.05) 0%, transparent 60%);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .border-glow {
+            width: 100%;
+            height: 100%;
+            padding: 3px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #0068ff, #00c8ff, #0068ff);
+            background-size: 300% 300%;
+            animation: flowBorder 4s ease-in-out infinite;
+            box-shadow: 0 0 60px rgba(0,100,255,0.06);
+            display: flex;
+        }
+
+        @keyframes flowBorder {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .card {
+            background: rgba(10, 10, 10, 0.94);
+            backdrop-filter: blur(20px);
+            border-radius: 17px;
+            padding: 24px 30px 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(0,200,255,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.2fr;
+            gap: 28px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .col-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            padding-right: 5px;
+            min-height: 0;
+        }
+
+        .col-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            padding-right: 5px;
+            min-height: 0;
+        }
+
+        .col-left::-webkit-scrollbar,
+        .col-right::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .col-left::-webkit-scrollbar-thumb,
+        .col-right::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #cc44ff, #0068ff);
+            border-radius: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            margin-bottom: 2px;
+        }
+
+        .name-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .name-title span {
+            background: linear-gradient(135deg, #00aaff, #0068ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #00ccff;
+            font-weight: 700;
+            background: rgba(0,200,255,0.08);
+            padding: 6px 20px;
+            border-radius: 100px;
+            border: 1px solid rgba(0,200,255,0.12);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ccff;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 20px 24px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            flex-shrink: 0;
+        }
+
+        .avatar-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0,200,255,0.2);
+            transition: 0.3s;
+        }
+
+        .avatar:hover {
+            border-color: #00aaff;
+            transform: scale(1.03);
+        }
+
+        .ring-rotate {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #00aaff;
+            border-bottom-color: #0068ff;
+            animation: spin 5s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .info .position {
+            font-size: 16px;
+            color: #00ccff;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .info .position i {
+            margin-right: 5px;
+            font-size: 13px;
+            color: #0088ff;
+        }
+
+        .info .tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .info .tags span {
+            font-size: 10px;
+            padding: 5px 16px;
+            border-radius: 100px;
+            background: rgba(0,200,255,0.06);
+            border: 1px solid rgba(0,200,255,0.08);
+            color: #88ccff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .info .tags span.highlight {
+            background: rgba(0,200,255,0.12);
+            border-color: rgba(0,200,255,0.2);
+            color: #00ddff;
+        }
+
+        .btn-about {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(200,0,255,0.08), rgba(0,100,255,0.06));
+            border: 1px solid rgba(200,0,255,0.12);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-about:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, rgba(200,0,255,0.15), rgba(0,100,255,0.10));
+            border-color: rgba(200,0,255,0.20);
+            box-shadow: 0 0 35px rgba(200,0,255,0.06);
+        }
+
+        .btn-about:active {
+            transform: scale(0.97);
+        }
+
+        .btn-about i {
+            color: #cc88ff;
+            font-size: 17px;
+        }
+
+        .btn-about .arrow-right {
+            margin-left: auto;
+            color: #446688;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-about:hover .arrow-right {
+            color: #cc88ff;
+            transform: translateX(4px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 16px 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+        }
+
+        .stat:hover {
+            background: rgba(0,200,255,0.04);
+            transform: translateY(-2px);
+            border-color: rgba(0,200,255,0.10);
+        }
+
+        .stat .num {
+            font-size: 30px;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat .num.g1 { background: linear-gradient(135deg, #00aaff, #0068ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .num.g2 { background: linear-gradient(135deg, #00ff88, #00cc66); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .num.g3 { background: linear-gradient(135deg, #ff8800, #ff4400); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .stat .lbl {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            margin-top: 4px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #4488aa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0,200,255,0.15), transparent);
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .skill-item .skill-name {
+            font-size: 14px;
+            color: #ccc;
+            font-weight: 500;
+            min-width: 160px;
+        }
+
+        .skill-item .skill-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-item .skill-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #0068ff, #00ccff);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .skill-item .skill-pct {
+            font-size: 13px;
+            color: #668899;
+            font-weight: 600;
+            min-width: 38px;
+            text-align: right;
+        }
+
+        .exp-item {
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 8px;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .exp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(0,200,255,0.08);
+        }
+
+        .exp-item .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .exp-item .exp-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .exp-item .exp-company {
+            font-size: 14px;
+            color: #00ccff;
+            font-weight: 600;
+        }
+
+        .exp-item .exp-date {
+            font-size: 12px;
+            color: #556677;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .exp-item .exp-desc {
+            font-size: 14px;
+            color: #8899aa;
+            margin-top: 6px;
+            line-height: 1.8;
+        }
+
+        .exp-item .exp-desc i {
+            color: #44aacc;
+            margin-right: 6px;
+            font-size: 11px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(255,255,255,0.04);
+            transform: translateX(3px);
+            border-color: rgba(0,200,255,0.08);
+        }
+
+        .contact-link .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .contact-link .icon.zl { background: #0068ff; }
+        .contact-link .icon.mail { background: linear-gradient(135deg, #ff6600, #ff0044); }
+        .contact-link .icon.phone { background: linear-gradient(135deg, #00cc66, #00aa44); }
+        .contact-link .icon.fb { background: #1877f2; }
+        .contact-link .icon.gh { background: #1a1a1a; }
+
+        .contact-link .text {
+            flex: 1;
+        }
+
+        .contact-link .text .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+        }
+
+        .contact-link .text .desc {
+            font-size: 12px;
+            color: #667788;
+            display: block;
+        }
+
+        .contact-link .arrow-link {
+            color: #334455;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .contact-link:hover .arrow-link {
+            color: #44bbff;
+            transform: translateX(3px);
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 14px;
+            margin-top: 4px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 12px;
+            color: #334455;
+            grid-column: 1 / -1;
+            flex-shrink: 0;
+        }
+
+        .footer .heart {
+            color: #ff0044;
+            display: inline-block;
+            animation: heartBeat 1s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .popup {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(30px);
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-box {
+            max-width: 540px;
+            width: 100%;
+            max-height: 85vh;
+            background: linear-gradient(145deg, #141414, #0a0a0a);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .popup.active .popup-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, rgba(200,0,255,0.10), rgba(0,100,255,0.08));
+            padding: 24px 28px 18px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            flex-shrink: 0;
+        }
+
+        .popup-avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: block;
+            border: 2px solid rgba(200,0,255,0.2);
+        }
+
+        .popup-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .popup-handle {
+            font-size: 14px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .popup-handle i {
+            color: #555;
+            margin-right: 4px;
+        }
+
+        .popup-body {
+            padding: 24px 28px 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .popup-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .popup-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #cc44ff, #0068ff);
+            border-radius: 10px;
+        }
+
+        .popup-bio {
+            text-align: center;
+            font-size: 15px;
+            color: #bbb;
+            line-height: 2;
+            padding: 20px 22px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 16px;
+        }
+
+        .popup-bio .highlight-name { color: #fff; font-weight: 700; }
+        .popup-bio .highlight-skill { color: #88ddff; font-weight: 600; }
+        .popup-bio .highlight-learn { color: #cc88ff; font-weight: 600; }
+        .popup-bio .quote {
+            display: block;
+            margin-top: 12px;
+            font-style: italic;
+            color: #668899;
+            font-size: 14px;
+        }
+        .popup-bio .quote i { color: #446688; margin: 0 4px; }
+
+        .learning-badge {
+            display: inline-block;
+            background: rgba(200,0,255,0.08);
+            border: 1px solid rgba(200,0,255,0.12);
+            color: #cc88ff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 20px;
+            border-radius: 100px;
+            margin: 0 auto 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .learning-badge i {
+            margin-right: 6px;
+            font-size: 11px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .popup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .popup-grid .item {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+        }
+
+        .popup-grid .item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+
+        .popup-grid .item .icon {
+            font-size: 22px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .popup-grid .item .icon.pink { color: #cc44ff; }
+        .popup-grid .item .icon.blue { color: #44bbff; }
+        .popup-grid .item .icon.green { color: #44ff88; }
+        .popup-grid .item .icon.orange { color: #ff8844; }
+
+        .popup-grid .item .lbl {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .popup-grid .item .val {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 700;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .popup-hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 8px 0 14px;
+        }
+
+        .popup-hobbies span {
+            font-size: 12px;
+            padding: 4px 16px;
+            border-radius: 100px;
+            background: rgba(200,0,255,0.06);
+            border: 1px solid rgba(200,0,255,0.08);
+            color: #cc88ff;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .popup-hobbies span:hover {
+            background: rgba(200,0,255,0.12);
+            transform: scale(1.05);
+        }
+
+        .popup-quote-end {
+            text-align: center;
+            font-size: 12px;
+            color: #667788;
+            margin: 10px 0 14px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .popup-quote-end i { color: #446688; margin: 0 6px; }
+        .popup-quote-end .highlight-text { color: #cc88ff; font-weight: 600; }
+
+        .close-popup {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(200,0,255,0.08), rgba(0,100,255,0.06));
+            border: 1px solid rgba(200,0,255,0.10);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .close-popup:hover {
+            background: linear-gradient(135deg, rgba(200,0,255,0.15), rgba(0,100,255,0.10));
+            border-color: rgba(200,0,255,0.20);
+        }
+
+        .close-popup:active { transform: scale(0.97); }
+        .close-popup i { color: #cc88ff; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(16,16,16,0.95);
+            backdrop-filter: blur(20px);
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,200,255,0.08);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 90%;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast i { color: #44bbff; font-size: 16px; }
+
+        @media (max-width: 1024px) {
+            .cv-grid {
+                grid-template-columns: 1fr 1.8fr;
+                gap: 20px;
+            }
+            .card { padding: 20px 24px 14px; }
+            .skill-item .skill-name { min-width: 130px; }
+        }
+
+        @media (max-width: 820px) {
+            html, body { overflow: auto; }
+            body { padding: 12px; align-items: flex-start; }
+            .container { height: auto; }
+            .border-glow { height: auto; }
+            .card { height: auto; padding: 20px; }
+            .cv-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .col-left, .col-right {
+                overflow-y: visible;
+                padding-right: 0;
+            }
+            .profile {
+                flex-direction: row;
+                text-align: left;
+                gap: 18px;
+                padding: 18px 20px;
+            }
+            .avatar { width: 90px; height: 90px; }
+            .info .tags { justify-content: flex-start; }
+            .stats { grid-template-columns: repeat(3, 1fr); }
+            .skill-item .skill-name { min-width: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 6px; }
+            .card { padding: 14px 12px 10px; border-radius: 14px; }
+            .border-glow { border-radius: 14px; padding: 2px; }
+            .name-title { font-size: 20px; }
+            .badge { font-size: 8px; padding: 3px 12px; }
+            .profile { flex-direction: column; text-align: center; padding: 14px; gap: 10px; }
+            .avatar { width: 80px; height: 80px; }
+            .ring-rotate { inset: -4px; border-width: 1.5px; }
+            .info h3 { font-size: 20px; }
+            .info .position { font-size: 13px; }
+            .info .tags span { font-size: 8px; padding: 3px 10px; }
+            .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .stat { padding: 10px 4px; border-radius: 8px; }
+            .stat .num { font-size: 22px; }
+            .stat .lbl { font-size: 8px; }
+            .section-title { font-size: 11px; margin-bottom: 6px; }
+            .skill-item { gap: 8px; }
+            .skill-item .skill-name { min-width: 100px; font-size: 11px; }
+            .skill-item .skill-bar { height: 4px; }
+            .skill-item .skill-pct { font-size: 10px; min-width: 30px; }
+            .exp-item { padding: 10px 12px; border-radius: 8px; margin-bottom: 6px; }
+            .exp-item .exp-title { font-size: 14px; }
+            .exp-item .exp-company { font-size: 12px; }
+            .exp-item .exp-date { font-size: 10px; }
+            .exp-item .exp-desc { font-size: 12px; line-height: 1.6; }
+            .contact-link { padding: 8px 10px; border-radius: 8px; gap: 10px; }
+            .contact-link .icon { width: 28px; height: 28px; font-size: 12px; }
+            .contact-link .text .title { font-size: 12px; }
+            .contact-link .text .desc { font-size: 10px; }
+            .btn-about { padding: 12px; font-size: 14px; border-radius: 10px; }
+            .footer { font-size: 10px; padding-top: 10px; }
+            .popup { padding: 10px; }
+            .popup-box { max-width: 100%; max-height: 90vh; border-radius: 18px; }
+            .popup-header { padding: 18px 18px 14px; }
+            .popup-body { padding: 14px 18px 18px; }
+            .popup-bio { font-size: 14px; padding: 14px; }
+            .popup-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .popup-grid .item { padding: 10px 8px; }
+            .popup-grid .item .val { font-size: 14px; }
+            .popup-hobbies span { font-size: 11px; padding: 3px 12px; }
+        }
+
+        @media print {
+            .bg-glow { display: none; }
+            html, body { overflow: visible; height: auto; }
+            body { background: #fff; padding: 12px; }
+            .border-glow { 
+                padding: 0; 
+                background: none; 
+                box-shadow: none; 
+                border-radius: 0;
+                animation: none;
+                height: auto;
+            }
+            .card { 
+                background: #fff; 
+                border: 1px solid #ddd; 
+                box-shadow: none;
+                padding: 20px;
+                height: auto;
+            }
+            .btn-about { display: none; }
+            .popup { display: none; }
+            .stat .num { -webkit-text-fill-color: #0068ff; }
+            .stat .num.g1 { -webkit-text-fill-color: #0068ff; }
+            .stat .num.g2 { -webkit-text-fill-color: #00aa44; }
+            .stat .num.g3 { -webkit-text-fill-color: #ff6600; }
+            .info .tags span { border-color: #ccc; color: #333; background: #f0f0f0; }
+            .contact-link { border-color: #ddd; }
+            .contact-link .text .title { color: #222; }
+            .contact-link .text .desc { color: #666; }
+            .exp-item { border-color: #ddd; }
+            .exp-item .exp-title { color: #222; }
+            .footer { border-color: #ddd; color: #999; }
+            .badge { border-color: #0068ff; color: #0068ff; background: #eef8ff; }
+            .info .position { color: #0068ff; }
+            .section-title { color: #0068ff; }
+            .skill-item .skill-name { color: #333; }
+            .toast { display: none; }
+            .ring-rotate { display: none; }
+            .avatar { border-color: #0068ff; }
+            .name-title span { -webkit-text-fill-color: #0068ff; }
+            .cv-grid { gap: 18px; }
+            .col-left, .col-right { overflow: visible; }
+            .profile { border-color: #ddd; background: #fafafa; }
+            .stat { border-color: #eee; background: #fafafa; }
+            .skill-item .skill-bar { background: #eee; }
+            .skill-item .skill-bar .fill { background: #0068ff; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+    <div class="border-glow">
+        <div class="card">
+
+            <div class="header">
+                <div class="name-title"><span>KHANHPC</span></div>
+                <div class="badge">
+                    <span class="dot"></span>
+                    Sẵn sàng học hỏi
+                </div>
+            </div>
+
+            <div class="cv-grid">
+
+                <div class="col-left">
+
+                    <div class="profile">
+                        <div class="avatar-wrap">
+                            <div class="ring-rotate"></div>
+                            <img class="avatar" src="KHANHPC.png" alt="Hoàng Quốc Khánh"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=HQK&background=0a1a2a&color=00ccff&size=120'">
+                        </div>
+                        <div class="info">
+                            <h3>Hoàng Quốc Khánh</h3>
+                            <div class="position"><i class="fas fa-tools"></i> Kỹ thuật viên PC</div>
+                            <div class="tags">
+                                <span class="highlight">Lắp ráp PC</span>
+                                <span>Bảo trì</span>
+                                <span>Cài đặt</span>
+                                <span>Sửa chữa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-about" id="openPopup">
+                        <i class="fas fa-user-graduate"></i>
+                        Về tôi &amp; định hướng
+                        <span class="arrow-right"><i class="fas fa-chevron-right"></i></span>
+                    </button>
+
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="num g1">3+</span>
+                            <span class="lbl">Năm Kinh nghiệm</span>
+                        </div>
+                        <div class="stat">
+                            <span class="num g2">50+</span>
+                            <span class="lbl">PC đã lắp ráp</span>
+                        </div>
+                        <div class="stat">
+                            <span class="num g3">100+</span>
+                            <span class="lbl">Sự cố đã xử lý</span>
+                        </div>
+                    </div>
+
+                    <div class="section-title"><i class="fas fa-address-card"></i> Liên hệ</div>
+                    <div class="contact-links">
+                        <a href="https://zalo.me/0924944845" class="contact-link" target="_blank">
+                            <span class="icon zl"><i class="fas fa-comment-dots"></i></span>
+                            <span class="text">
+                                <span class="title">Zalo</span>
+                                <span class="desc">0924.944.845</span>
+                            </span>
+                            <span class="arrow-link"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+
+                        <a href="mailto:khanhpc.dev@gmail.com" class="contact-link" target="_blank">
+                            <span class="icon mail"><i class="fas fa-envelope"></i></span>
+                            <span class="text">
+                                <span class="title">Email</span>
+                                <span class="desc">khanhpc.dev@gmail.com</span>
+                            </span>
+                            <span class="arrow-link"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+
+                        <a href="tel:0924944845" class="contact-link">
+                            <span class="icon phone"><i class="fas fa-phone"></i></span>
+                            <span class="text">
+                                <span class="title">Điện thoại</span>
+                                <span class="desc">0924.944.845</span>
+                            </span>
+                            <span class="arrow-link"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+
+                        <a href="https://www.facebook.com/khanhpc548" class="contact-link" target="_blank">
+                            <span class="icon fb"><i class="fab fa-facebook-f"></i></span>
+                            <span class="text">
+                                <span class="title">Facebook</span>
+                                <span class="desc">Hoàng Quốc Khánh</span>
+                            </span>
+                            <span class="arrow-link"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+
+                        <a href="https://github.com/HoangQuocKhanh0504" class="contact-link" target="_blank">
+                            <span class="icon gh"><i class="fab fa-github"></i></span>
+                            <span class="text">
+                                <span class="title">GitHub</span>
+                                <span class="desc">HoangQuocKhanh0504</span>
+                            </span>
+                            <span class="arrow-link"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="col-right">
+
+                    <div class="section-title"><i class="fas fa-microchip"></i> Kỹ năng chuyên môn</div>
+                    <div class="skills">
+                        <div class="skill-item">
+                            <span class="skill-name">Lắp ráp &amp; tháo PC</span>
+                            <div class="skill-bar"><div class="fill" style="width:88%;"></div></div>
+                            <span class="skill-pct">88%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Cài đặt HĐH &amp; Driver</span>
+                            <div class="skill-bar"><div class="fill" style="width:85%;"></div></div>
+                            <span class="skill-pct">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Xử lý lỗi phần cứng</span>
+                            <div class="skill-bar"><div class="fill" style="width:80%;"></div></div>
+                            <span class="skill-pct">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Phần mềm văn phòng</span>
+                            <div class="skill-bar"><div class="fill" style="width:75%;"></div></div>
+                            <span class="skill-pct">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Tư vấn linh kiện</span>
+                            <div class="skill-bar"><div class="fill" style="width:40%;"></div></div>
+                            <span class="skill-pct">40%</span>
+                        </div>
+                    </div>
+
+                    <div class="section-title"><i class="fas fa-briefcase"></i> Kinh nghiệm làm việc</div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-title">Kỹ thuật viên tự do</span>
+                            <span class="exp-date">2022 - Nay</span>
+                        </div>
+                        <div class="exp-company"><i class="fas fa-user-astronaut"></i> Freelance</div>
+                        <div class="exp-desc">
+                            <i class="fas fa-check-circle"></i> Lắp ráp, nâng cấp và bảo trì PC cho khách hàng cá nhân<br>
+                            <i class="fas fa-check-circle"></i> Xử lý các sự cố phần cứng, phần mềm thường gặp<br>
+                            <i class="fas fa-check-circle"></i> Cài đặt Windows, driver và phần mềm ứng dụng
+                        </div>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-title">Hỗ trợ kỹ thuật</span>
+                            <span class="exp-date">2020 - 2022</span>
+                        </div>
+                        <div class="exp-company"><i class="fas fa-store"></i> Cửa hàng máy tính địa phương</div>
+                        <div class="exp-desc">
+                            <i class="fas fa-check-circle"></i> Kiểm tra, bảo trì và sửa chữa máy tính để bàn<br>
+                            <i class="fas fa-check-circle"></i> Cài đặt Windows, driver và phần mềm ứng dụng<br>
+                            <i class="fas fa-check-circle"></i> Hỗ trợ khách hàng tại quầy và tư vấn cơ bản
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer">
+                    <span class="heart">❤</span> 2026 · Hoàng Quốc Khánh · Kỹ thuật viên PC
+                    <span class="heart">❤</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-box">
+        
+        <div class="popup-header">
+            <img class="popup-avatar" src="KHANHPC.png" alt="Hoàng Quốc Khánh"
+                 onerror="this.src='https://ui-avatars.com/api/?name=HQK&background=0a1a2a&color=cc44ff&size=80'">
+            <div class="popup-name">Hoàng Quốc Khánh</div>
+            <div class="popup-handle"><i class="fas fa-at"></i> khanhpc · Kỹ thuật viên PC</div>
+        </div>
+
+        <div class="popup-body">
+
+            <div class="popup-bio">
+                <span class="highlight-name">Chào bạn, mình là Khánh.</span><br>
+                Mình có <span class="highlight-skill">một chút kinh nghiệm</span> 
+                về lắp ráp, tháo lắp PC và xử lý sự cố cơ bản.<br><br>
+                
+                Mình <span class="highlight-learn">không phải là người giỏi nhất</span>, 
+                nhưng mình có <span class="highlight-learn">tinh thần học hỏi không ngừng</span>.<br>
+                Mỗi ngày mình đều tìm tòi, khám phá và cập nhật kiến thức mới 
+                về công nghệ, phần cứng và phần mềm.<br><br>
+                
+                <span class="highlight-learn">Mình tin rằng:</span> 
+                "Không ai sinh ra đã biết tất cả, 
+                quan trọng là dám học hỏi và không ngừng tiến bộ."<br><br>
+                
+                Mình đang tìm kiếm một môi trường để 
+                <span class="highlight-skill">vừa làm việc, vừa phát triển bản thân</span> 
+                và đóng góp giá trị cho đội ngũ.
+                
+                <span class="quote">
+                    <i class="fas fa-quote-left"></i> 
+                    Học, học nữa, học mãi 
+                    <i class="fas fa-quote-right"></i>
+                </span>
+            </div>
+
+            <div style="text-align:center;">
+                <span class="learning-badge">
+                    <i class="fas fa-graduation-cap"></i>
+                    Không ngừng học hỏi
+                </span>
+            </div>
+
+            <div class="popup-grid">
+                <div class="item">
+                    <span class="icon pink"><i class="fas fa-user-graduate"></i></span>
+                    <span class="lbl">Tinh thần</span>
+                    <span class="val">Ham học hỏi</span>
+                </div>
+                <div class="item">
+                    <span class="icon blue"><i class="fas fa-map-pin"></i></span>
+                    <span class="lbl">Đến từ</span>
+                    <span class="val">Việt Nam</span>
+                </div>
+                <div class="item">
+                    <span class="icon green"><i class="fas fa-calendar-alt"></i></span>
+                    <span class="lbl">Kinh nghiệm</span>
+                    <span class="val">3+ năm</span>
+                </div>
+                <div class="item">
+                    <span class="icon orange"><i class="fas fa-rocket"></i></span>
+                    <span class="lbl">Mục tiêu</span>
+                    <span class="val">Trưởng thành mỗi ngày</span>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-bottom:4px;">
+                <div style="font-size:10px;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">
+                    <i class="fas fa-heart" style="color:#ff4466;margin-right:6px;"></i> Mình thích
+                </div>
+                <div class="popup-hobbies">
+                    <span>🔧 Lắp ráp PC</span>
+                    <span>📖 Học công nghệ mới</span>
+                    <span>🎵 Nhạc Chill</span>
+                    <span>💡 Khám phá</span>
+                    <span>🤝 Làm việc nhóm</span>
+                    <span>🌱 Phát triển bản thân</span>
+                </div>
+            </div>
+
+            <div class="popup-quote-end">
+                <i class="fas fa-quote-left"></i>
+                "Mình không biết nhiều, nhưng mình <span class="highlight-text">sẵn sàng học</span>"
+                <i class="fas fa-quote-right"></i>
+            </div>
+
+            <button class="close-popup" id="closePopup">
+                <i class="fas fa-times"></i> Đóng
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <i class="fas fa-info-circle"></i>
+    <span id="toastMsg">👋 Chào bạn!</span>
+</div>
+
+<script>
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimeout;
+
+    function showToast(msg) {
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    const openBtn = document.getElementById('openPopup');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closePopup');
+
+    openBtn.addEventListener('click', () => {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showToast('👤 Về tôi và định hướng');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popup.classList.contains('active')) {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    const skillFills = document.querySelectorAll('.skill-bar .fill');
+    let animated = false;
+
+    function animateSkills() {
+        if (animated) return;
+        skillFills.forEach(fill => {
+            const width = fill.style.width;
+            fill.style.width = '0%';
+            setTimeout(() => {
+                fill.style.width = width;
+            }, 200);
+        });
+        animated = true;
+    }
+
+    window.addEventListener('load', function() {
+        setTimeout(animateSkills, 500);
+        showToast('👋 Chào bạn! Cùng tìm hiểu về tôi nhé');
+    });
+
+    console.log('📄 CV Kỹ thuật viên PC - Hoàng Quốc Khánh');
+    console.log('📞 Zalo: 0924.944.845');
+    console.log('📧 Email: khanhpc.dev@gmail.com');
+</script>
+
+</body>
+</html>
